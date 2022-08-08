@@ -17,10 +17,11 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework.authtoken import views
-from newuser.views import item_all
+from newuser.views import item_all,Item_by_one
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('apiauth/', views.obtain_auth_token, name='api-token-auth'),
+    path('apiauth/', views.obtain_auth_token),
+    path('by/<int:id>',Item_by_one.as_view()),
     path('ap/', item_all)
 ]
