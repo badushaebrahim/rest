@@ -4,8 +4,11 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .models import Items
 from .serializer import Item_serializers
+
 # Create your views here.
 
 
@@ -23,6 +26,8 @@ def item_all(request):
             return Response(serial.data)
 
 class Item_by_one (APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     
     def get(self,request,id):
         itemdata = valueget(id)
